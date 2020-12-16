@@ -4,7 +4,7 @@
   // unset($_SESSION['nextOfKin']);
   // unset($_SESSION['nextOfkin']);
   // unset($_SESSION['accountDetails']);
-  // var_dump($_SESSION); exit;
+  var_dump($_SESSION); exit;
   $subPath = $_SERVER['HTTP_HOST'] == 'localhost:8888' ? '/investment-dashboard' : '';
   $currentPage = 'Dashboard';
   $header = 'Last ten Transaction';
@@ -33,8 +33,6 @@
       }
   
       $user = getUser($id);
-
-      var_dump($user);
   
       if (!$user || $user['code_token'] != $tokenCode) {
         die('Server Error CODE: 997223547');
