@@ -22,7 +22,6 @@
 
     function getNextOfKin() {
         $id = $_SESSION['userInfo']['id'];
-        var_dump($id);
         $pdo = (object)['pdo' => DBConnection::getDB()];
         $nextOfKin = Model::findOne($pdo, array('user_id' => $id), 'next_of_kin');
 
@@ -31,15 +30,13 @@
 
     function getAccountDetails() {
         $id = $_SESSION['userInfo']['id'];
-        var_dump($id); 
         $pdo = (object)['pdo' => DBConnection::getDB()];
         $bankDetails = Model::findOne($pdo, array('user_id' => $id), 'bank_details');
 
-        return $bankDetails;
+        return $bankDetails ? $bankDetails : array();
     }
 
     function updateUserDetails($isNextOfKin=false) {
-        // var_dump($_SESSION['userInfo']); exit;
         $id = $_SESSION['userInfo']['id'];
         $pdo = (object)['pdo' => DBConnection::getDB()];
         $errorMessages = array();
@@ -89,13 +86,13 @@
             $nextOfKin = Model::findOne($pdo, array('user_id' => $id), 'next_of_kin');
 
             if (!$nextOfKin) {
+                $userDetails['user_id'] = $id;
                 if (Model::create($pdo, $userDetails, 'next_of_kin')) {
                     $_SESSION['nextOfKin'] = $userDetails;
                     Helper::jsonResponse(array('success' => true, 'message' => 'User details updated successfully'));
                 }
             } else {
                 if(Model::update($pdo, $userDetails, array('user_id' => $id), 'next_of_kin')) {
-                    // var_dump($userDetails); exit;
                     $_SESSION['nextOfKin'] = $userDetails;
                     Helper::jsonResponse(array('success' => true, 'message' => 'User details updated successfully'));
                 }
@@ -152,8 +149,6 @@
             'bank_name' => $bankName,
             'bank_code' => $bankCode
         );
-
-      //  var_dump($bankDetails); exit;
 
         if (!$userBank) {
             $bankDetails['user_id'] = $id;
