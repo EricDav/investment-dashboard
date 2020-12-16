@@ -143,6 +143,7 @@
                 return $stmt->fetch();
                 
             } catch(Exception $e) {
+                var_dump($e->getMessage()); exit;
                 return $e->getMessage();
                // return 'Server error';
             }
