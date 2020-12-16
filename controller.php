@@ -22,14 +22,16 @@
 
     function getNextOfKin() {
         $id = $_SESSION['userInfo']['id'];
+        var_dump($id);
         $pdo = (object)['pdo' => DBConnection::getDB()];
         $nextOfKin = Model::findOne($pdo, array('user_id' => $id), 'next_of_kin');
 
-        return $nextOfKin;
+        return $nextOfKin ? $nextOfKin : array();
     }
 
     function getAccountDetails() {
         $id = $_SESSION['userInfo']['id'];
+        var_dump($id); 
         $pdo = (object)['pdo' => DBConnection::getDB()];
         $bankDetails = Model::findOne($pdo, array('user_id' => $id), 'bank_details');
 
