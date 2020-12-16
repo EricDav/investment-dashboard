@@ -33,9 +33,11 @@
       }
   
       $user = getUser($id);
+
+      var_dump($user);
   
       if (!$user || $user['code_token'] != $tokenCode) {
-        die('Server Error CODE: 997223546');
+        die('Server Error CODE: 997223547');
       }
   
       $_SESSION['userInfo'] = $user;
