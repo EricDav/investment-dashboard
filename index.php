@@ -1,9 +1,9 @@
 <?php
   session_start();
  include 'controller.php';
-  // unset($_SESSION['nextOfKin']);
-  // unset($_SESSION['nextOfkin']);
-  // unset($_SESSION['accountDetails']);
+  unset($_SESSION['nextOfKin']);
+  unset($_SESSION['userInfo']);
+  unset($_SESSION['accountDetails']);
   var_dump($_SESSION); exit;
   $subPath = $_SERVER['HTTP_HOST'] == 'localhost:8888' ? '/investment-dashboard' : '';
   $currentPage = 'Dashboard';
