@@ -22,8 +22,10 @@
 
 
 <script src="<?=$subPath . '/assets/js/jquery-3.3.1.min.js'?>"></script>
+<script src="<?=$subPath . '/assets/js/jquery-1.10.2.min.js'?>"></script>
 
 <!-- chart js -->
+
 <script src="<?=$subPath . '/assets/js/utils.js'?>"></script>
 <!-- //chart js -->
 
@@ -55,6 +57,7 @@
 <!-- disable body scroll when navbar is in active -->
 
  <!-- loading-gif Js -->
+ <script src="<?=$subPath . '/assets/js/modernizr.js'?>"></script>
  <script>
      $(window).load(function () {
          // Animate loader off screen
