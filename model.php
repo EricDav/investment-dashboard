@@ -143,8 +143,8 @@
                 return $stmt->fetch();
                 
             } catch(Exception $e) {
-                echo $e->getMessage();
-                return 'Server error';
+                return $e->getMessage();
+               // return 'Server error';
             }
         }
 
