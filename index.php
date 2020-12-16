@@ -23,23 +23,28 @@
     }
 
   } else {
-    if (!isset($_SESSION['userInfo'])) {
-      Helper::jsonResponse(array('success' => false, 'message' => $errorMessages, 'isLogin' => false));
-    }
 
-    if (!isset($_SESSION['nextOfKin'])) {
+    if (!isset($_SESSION['userInfo'])) {
+      $tokenCode = $_GET['code'];
+      $id = $_GET['_id'];
+  
+      if (!is_numeric($id) || !is_numeric($tokenCode)) {
+        die('Server Error CODE: 997223546');
+      }
+  
+      $user = getUser($id);
+  
+      if (!$user || $user['code_token'] != $tokenCode) {
+        die('Server Error CODE: 997223546');
+      }
+  
+      $_SESSION['userInfo'] = $user;
       $nextOfKin = getNextOfKin();
       $_SESSION['nextOfKin'] = $nextOfKin;
-    }
-
-    if (!isset($_SESSION['accountDetails'])) {
       $bankDetails = getAccountDetails();
       $_SESSION['accountDetails'] = $bankDetails;
     }
-    
   }
-
-  // var_dump($_SESSION); EXIT;
 
   $url = explode('?', $_SERVER['REQUEST_URI'])[0];
   if ($url == '/transactions') {
