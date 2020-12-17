@@ -29,7 +29,7 @@
       $id = $_GET['_id'];
 
       if (!isset($_GET['_id']) || !isset($_GET['code'])) {
-        header("Location: http://dev.wiseinvestment.com.ng/?showloginmodal=1");
+        header("Location: http://wiseinvestment.com.ng/?showloginmodal=1");
       }
   
       if (!is_numeric($id) || !is_numeric($tokenCode)) {
