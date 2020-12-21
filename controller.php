@@ -20,6 +20,31 @@
         return array('transactions' => $transactions, 'investments' => $investments);
     }
 
+    function withdrawFunds() {
+        $pdo = (object)['pdo' => DBConnection::getDB()];
+        $id = $_SESSION['userInfo']['id'];
+
+        if (!is_numeric($_POST['amount'])) {
+            Helper::jsonResponse(array('success' => false, 'message' => 'Invalid amount'));
+        }
+
+        $balance = getBalance($details['transactions'], $details['investments']);
+
+        if ($_POST['amount'] > $balance) {
+            Helper::jsonResponse(array('success' => false, 'message' => 'Insufficient balance'));
+        }
+
+        $result = Model::create($pdo, array('amount' => $_POST['amount'], 'transaction_type' => 0, 'status' => 1, 
+                        'date_created' => date('d-m-y h:i:s'), 'user_id' => $id), 'transactions');
+        
+        
+        if ($result) {
+            Helper::jsonResponse(array('success' => true, 'message' => 'Your wthdrawal request submitted successfully'));
+        }
+
+        Helper::jsonResponse(array('success' => false, 'message' => 'Server error'));
+    }
+
     function getNextOfKin() {
         $id = $_SESSION['userInfo']['id'];
         $pdo = (object)['pdo' => DBConnection::getDB()];

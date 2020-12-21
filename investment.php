@@ -14,18 +14,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach($investments as $investment): ?>
+                <?php foreach($details['investments'] as $investment): ?>
                     <tr role="row" class="odd">
                         <td class=""><?=$investment['type']?></td>
                         <td class="sorting_1"><?=$investment['amount']?></td>
                         <td><?=(explode(" ", $investment['date_created'])[0])?></td>
-                        <td><span class="badge badge-success">0</span></td>
+                        <td><span class="badge badge-success"><?=getMatureDate($investment['date_created'], $investment['amount'])?></span></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
               </table>
             </div>
-            <?php if (sizeof($transactions) == 0): ?>
+            <?php if (sizeof($details['investments']) == 0): ?>
                     <div style="text-align: center;font-size: 20px;"><b>You did not have any investment</b></div>
             <?php endif; ?>
             </div>

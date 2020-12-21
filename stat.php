@@ -1,3 +1,8 @@
+<?php
+
+
+?>
+
 <nav aria-label="breadcrumb">
       <ol class="breadcrumb my-breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -22,7 +27,7 @@
             <div class="col-sm-6 pl-sm-2 statistics-grid">
               <div class="card card_border border-primary-top p-4">
                 <i class="lnr lnr-eye"> </i>
-                <h3 class="text-secondary number">₦ 0</h3>
+                <h3 class="text-secondary number"><?=('₦ ' . getTotalAmountInvested($details['investments']))?></h3>
                 <p class="stat-text">Total Amount Invested</p>
               </div>
             </div>
@@ -33,14 +38,14 @@
             <div class="col-sm-6 pr-sm-2 statistics-grid">
               <div class="card card_border border-primary-top p-4">
                 <i class="lnr lnr-cloud-download"> </i>
-                <h3 class="text-success number">₦ 0</h3>
+                <h3 class="text-success number"><?=('₦ ' . getTotalAmountWithdrawn($details['transactions']))?></h3>
                 <p class="stat-text">Total Amount Withdrawn</p>
               </div>
             </div>
             <div class="col-sm-6 pl-sm-2 statistics-grid">
               <div class="card card_border border-primary-top p-4">
                 <i class="lnr lnr-cart"> </i>
-                <h3 class="text-danger number">₦ 0</h3>
+                <h3 class="text-danger number"><?=('₦ ' . getBalance($details['transactions'], $details['investments']))?></h3>
                 <p class="stat-text">Available balance</p>
               </div>
             </div>

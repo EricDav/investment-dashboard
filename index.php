@@ -5,6 +5,73 @@
   // unset($_SESSION['userInfo']);
   // unset($_SESSION['accountDetails']);
   //  var_dump($_SESSION); exit;
+  function getMatureDate($dateCreated, $amount) {
+    $months = 0;
+
+    if ($amount < 60000) {
+        $months = 1;
+    } else if ($amount >= 60000 && $amount < 600000) {
+        $months = 3;
+    } else if ($amount >= 600000 && $amount < 1500000) {
+        $months = 6;
+    } else if ($amount >= 1500000) {
+        $months = 12;
+    }
+    $maturedDate = date('Y-m-d', strtotime("+" . $months ." months", strtotime($dateCreated)));
+
+    return $maturedDate;
+}
+
+function getPercent($amount) {
+  if ($amount < 60000) {
+      return 0.1;
+  } else if ($amount >= 60000 && $amount < 600000) {
+      return 0.15;
+  } else if ($amount >= 600000 && $amount < 1500000) {
+      return 0.2;
+  } else if ($amount >= 1500000) {
+      return 0.3;
+  }
+}
+
+function getTotalAmountInvested($investments) {
+  $totalAmount = 0;
+
+  foreach($investments as $investment) {
+    $totalAmount+=$investment['amount'];
+  }
+
+  return $totalAmount;
+
+}
+
+function getTotalAmountWithdrawn($transactions) {
+  $totalAmount = 0;
+
+  foreach($transactions as $transaction) {
+    if ($transaction['transaction_type'] == 0) {
+      $totalAmount+=$transaction['amount'];
+    }
+  }
+
+  return $totalAmount;
+}
+
+
+
+function getBalance($transactions, $investments) {
+  $amountWithdrawn = getTotalAmountWithdrawn($transactions);
+
+  $maturedInvestments = 0;
+  foreach($investments as $investment) {
+    if (date('d-m-y h:i:s') > getMatureDate($investment['date_created'], $investment['amount'])) {
+      $maturedInvestmentse+=$investment['amount'] + ($investment['amount'] * getPercent($investment['amount']));
+    }
+  }
+
+  return $maturedInvestments - $amountWithdrawn;
+}
+
   $subPath = $_SERVER['HTTP_HOST'] == 'localhost:8888' ? '/investment-dashboard' : '';
   $currentPage = 'Dashboard';
   $header = 'Last ten Transaction';
@@ -51,6 +118,7 @@
   }
 
   $url = explode('?', $_SERVER['REQUEST_URI'])[0];
+  $details = getDashboardDetails($_SESSION['userInfo']['id']);
   if ($url == '/transactions') {
     // echo 'Fuck you'; exit;
     $currentPage = 'Transactions';
@@ -73,13 +141,18 @@
     updateUserDetails(true);
   } else if ($url == '/updateBankAccountDetails') {
     updateBankAccountDetails($_SESSION['userInfo']['id']);
+  } else if ($url == '/withdraw') {
+    $header = 'Withdraw Funds';
+    include 'withdraw.php';
+    exit;
+  } else if ($url == '/withdrawFunds') {
+    withdrawFunds();
   } else if ($url == '/') {
     // pass 
   } else {
     header("Location: /");
   }
 
-  $details = getDashboardDetails($_SESSION['userInfo']['id']);
   $totalAmountInvested = 0;
   for ($i = 0; $i < sizeof($details['investments']); $i++) {
       $totalAmountInvested+=$details['investments'][$i]['amount'];
