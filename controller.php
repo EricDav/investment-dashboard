@@ -36,9 +36,13 @@
 
         $result = Model::create($pdo, array('amount' => $_POST['amount'], 'transaction_type' => 0, 'status' => 1, 
                         'date_created' => date('d-m-y h:i:s'), 'user_id' => $id), 'transactions');
+
+
+            
         
         
         if ($result) {
+            Model::create($pdo, array('user_id' => $id, 'amount' => $_POST['amount']));
             Helper::jsonResponse(array('success' => true, 'message' => 'Your wthdrawal request submitted successfully'));
         }
 
