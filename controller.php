@@ -15,7 +15,7 @@
         $pdo = (object)['pdo' => DBConnection::getDB()];
 
         $transactions =  Model::find($pdo, array('user_id' => $id), 'transactions');
-        $investments = Model::find($pdo, array('id' => $id), 'investments');
+        $investments = Model::find($pdo, array('user_id' => $id), 'investments');
 
         return array('transactions' => $transactions, 'investments' => $investments);
     }

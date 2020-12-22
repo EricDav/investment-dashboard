@@ -1,10 +1,6 @@
 <?php
   session_start();
  include 'controller.php';
-  // unset($_SESSION['nextOfKin']);
-  // unset($_SESSION['userInfo']);
-  // unset($_SESSION['accountDetails']);
-  //  var_dump($_SESSION); exit;
   function getMatureDate($dateCreated, $amount) {
     $months = 0;
 
@@ -75,6 +71,7 @@ function getBalance($transactions, $investments) {
   $subPath = $_SERVER['HTTP_HOST'] == 'localhost:8888' ? '/investment-dashboard' : '';
   $currentPage = 'Dashboard';
   $header = 'Last ten Transaction';
+
   if ($subPath == '/investment-dashboard') {
     $user = getUser(1);
     $_SESSION['userInfo'] = $user;
@@ -115,10 +112,12 @@ function getBalance($transactions, $investments) {
       $bankDetails = getAccountDetails();
       $_SESSION['accountDetails'] = $bankDetails;
     }
+
   }
 
   $url = explode('?', $_SERVER['REQUEST_URI'])[0];
   $details = getDashboardDetails($_SESSION['userInfo']['id']);
+  
   if ($url == '/transactions') {
     // echo 'Fuck you'; exit;
     $currentPage = 'Transactions';

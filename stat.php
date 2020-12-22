@@ -19,14 +19,14 @@
           <div class="row">
             <div class="col-sm-6 pr-sm-2 statistics-grid">
               <div class="card card_border border-primary-top p-4">
-                <i class="lnr lnr-users"> </i>
+                
                 <h3 class="text-primary number"><?=sizeof($details['investments'])?></h3>
                 <p class="stat-text">Total Investments</p>
               </div>
             </div>
             <div class="col-sm-6 pl-sm-2 statistics-grid">
               <div class="card card_border border-primary-top p-4">
-                <i class="lnr lnr-eye"> </i>
+                
                 <h3 class="text-secondary number"><?=('₦ ' . getTotalAmountInvested($details['investments']))?></h3>
                 <p class="stat-text">Total Amount Invested</p>
               </div>
@@ -37,14 +37,14 @@
           <div class="row">
             <div class="col-sm-6 pr-sm-2 statistics-grid">
               <div class="card card_border border-primary-top p-4">
-                <i class="lnr lnr-cloud-download"> </i>
+                
                 <h3 class="text-success number"><?=('₦ ' . getTotalAmountWithdrawn($details['transactions']))?></h3>
                 <p class="stat-text">Total Amount Withdrawn</p>
               </div>
             </div>
             <div class="col-sm-6 pl-sm-2 statistics-grid">
               <div class="card card_border border-primary-top p-4">
-                <i class="lnr lnr-cart"> </i>
+                
                 <h3 class="text-danger number"><?=('₦ ' . getBalance($details['transactions'], $details['investments']))?></h3>
                 <p class="stat-text">Available balance</p>
               </div>
