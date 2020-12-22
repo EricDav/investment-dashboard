@@ -23,7 +23,7 @@
                 <span class="status ml-2">Available</span>
               </li>
               <li> <a href="/profile"><i class="lnr lnr-user"></i>My Profile</a> </li>
-              <li class="logout" id="log-out"> <a href="#sign-up.html"><i class="fa fa-power-off"></i> Logout</a> </li>
+              <li class="logout" id="log-out"> <a href="/logout"><i class="fa fa-power-off"></i> Logout</a> </li>
             </ul>
           </li>
         </ul>

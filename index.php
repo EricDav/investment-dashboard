@@ -117,7 +117,7 @@ function getBalance($transactions, $investments) {
 
   $url = explode('?', $_SERVER['REQUEST_URI'])[0];
   $details = getDashboardDetails($_SESSION['userInfo']['id']);
-  
+
   if ($url == '/transactions') {
     // echo 'Fuck you'; exit;
     $currentPage = 'Transactions';
@@ -146,6 +146,8 @@ function getBalance($transactions, $investments) {
     exit;
   } else if ($url == '/withdrawFunds') {
     withdrawFunds();
+  } else if ($url == '/logout') {
+    include 'logout.php';
   } else if ($url == '/') {
     // pass 
   } else {
